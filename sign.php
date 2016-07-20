@@ -40,7 +40,7 @@ $cookie = "cookie.txt";
 $indexurl = "http://vwp123.com/user/index.php"; 
 
 //登录后要获取信息的地址 
-$signurl = "http://vwp123.com/user/_check.php"; 
+$signurl = "http://vwp123.com/user/_checkin.php"; 
 
 //模拟登录 
 login_post($loginurl, $cookie, $post); 
@@ -49,10 +49,11 @@ login_post($loginurl, $cookie, $post);
 $content = get_content($indexurl, $cookie);
 
 //匹配页面信息 
-if (strrpos($content, "已签到") < 0)
+if (strrpos($content, "已签到") > 0)
 	{echo "Signed";}
 else
 	{$content = get_content($signurl, $cookie);
+	 $content = get_content($indexurl, $cookie);
 	 if (strrpos($content, "已签到") > 0)
 		{echo "Sign Successfully";}
 	 else
